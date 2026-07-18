@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="考公计时器">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
+  <link rel="icon" href="assets/icons/icon-192.png">
+  <link rel="stylesheet" href="css/style.css">
+  <title>考公计时器</title>
+</head>
+<body data-page="home" data-theme="light" data-timer-style="digital">
+  <div class="app">
+    <header class="header">
+      <h1>考公计时器</h1>
+      <a class="gear" href="settings.html" aria-label="设置">⚙️</a>
+    </header>
+
+    <main class="page fade" id="page">
+      <!-- 科目选择 -->
+      <div class="subject-bar" id="subjectBar">
+        <div class="cur">
+          <span class="lab">当前科目</span>
+          <span class="val" id="curSubject">行测 › 资料分析</span>
+        </div>
+        <span class="chev">▼ 选择</span>
+      </div>
+
+      <!-- 计时器显示 -->
+      <div class="timer-wrap">
+        <div class="ring">
+          <svg viewBox="0 0 100 100">
+            <circle class="track" cx="50" cy="50" r="44"></circle>
+            <circle class="prog" id="progRing" cx="50" cy="50" r="44"></circle>
+          </svg>
+          <div class="center">
+            <div class="ttl" id="ringTtl">剩余时间</div>
+            <div class="time" id="ringTime">25:00</div>
+            <div class="mode-tag" id="modeTag">倒计时</div>
+          </div>
+        </div>
+        <div class="bar-timer">
+          <div class="time" id="barTime">25:00</div>
+          <div class="progress"><i id="barFill"></i></div>
+        </div>
+      </div>
+
+      <!-- 快捷时长 -->
+      <div class="durations" id="durations">
+        <button class="chip" data-min="15">15 分</button>
+        <button class="chip active" data-min="25">25 分</button>
+        <button class="chip" data-min="45">45 分</button>
+        <button class="chip" data-min="60">60 分</button>
+        <button class="chip" data-min="0" id="customChip">自定义</button>
+      </div>
+
+      <!-- 主控制区（JS 渲染） -->
+      <div id="timerControls"></div>
+
+      <!-- 今日统计条 -->
+      <div class="today-bar" id="todayBar">
+        <div class="tcell"><div class="v" id="todayMin">0</div><div class="k">今日已学</div></div>
+        <div class="tcell"><div class="v" id="streakDay">0</div><div class="k">连续专注</div></div>
+      </div>
+
+      <p class="tertiary" style="text-align:center;font-size:12px;margin-top:14px" id="examHint"></p>
+    </main>
+
+    <!-- 计时中全屏覆盖 -->
+    <div class="focus-overlay" id="focusOverlay">
+      <div class="f-subj" id="fSubj">行测 › 资料分析</div>
+      <div class="f-time" id="fTime">25:00</div>
+      <div class="f-tag" id="fTag">剩余</div>
+      <div class="f-btns">
+        <button class="f-btn pause" id="fPause">暂停</button>
+        <button class="f-btn end" id="fEnd">结束</button>
+      </div>
+      <div class="f-stats" id="fStats"></div>
+      <div class="f-hint">← 左滑结束 · 右滑暂停/继续</div>
+    </div>
+
+    <!-- 底部导航 -->
+    <nav class="tabbar">
+      <button class="active" data-go="index.html"><span class="ic">⏱️</span>计时</button>
+      <button data-go="stats.html"><span class="ic">📊</span>统计</button>
+      <button data-go="settings.html"><span class="ic">⚙️</span>设置</button>
+    </nav>
+  </div>
+
+  <!-- 科目选择弹窗 -->
+  <div class="sheet-mask" id="subjectSheet" style="display:none">
+    <div class="sheet">
+      <div class="sheet-head">
+        <h3>选择科目</h3>
+        <span class="x" data-close>✕</span>
+      </div>
+      <div id="subjectSheetContent"></div>
+    </div>
+  </div>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

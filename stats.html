@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="考公计时器">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
+  <link rel="icon" href="assets/icons/icon-192.png">
+  <link rel="stylesheet" href="css/style.css">
+  <title>学习统计 · 考公计时器</title>
+</head>
+<body data-page="stats" data-theme="light" data-timer-style="digital">
+  <div class="app">
+    <header class="header">
+      <h1>学习统计</h1>
+      <a class="gear" href="settings.html" aria-label="设置">⚙️</a>
+    </header>
+
+    <main class="page fade" id="page">
+      <!-- 今日概览 -->
+      <div class="card">
+        <h2 class="card-title">今日学习报告</h2>
+        <div class="overview">
+          <div class="ov"><div class="v accent" id="ovTotal">0</div><div class="k">总时长</div></div>
+          <div class="ov"><div class="v" id="ovCount">0</div><div class="k">专注次数</div></div>
+          <div class="ov"><div class="v" id="ovAvg">0</div><div class="k">平均时长</div></div>
+          <div class="ov"><div class="v" id="ovEff">0</div><div class="k">效率评分</div></div>
+        </div>
+      </div>
+
+      <!-- 科目分布 -->
+      <div class="card">
+        <h2 class="card-title">科目时长分布</h2>
+        <div class="bars" id="subjectBars"></div>
+      </div>
+
+      <!-- 趋势 -->
+      <div class="card">
+        <div class="row" style="margin-bottom:10px">
+          <h2 class="card-title" style="margin:0">学习趋势</h2>
+          <div class="seg" id="trendSeg">
+            <button data-range="day">日</button>
+            <button class="active" data-range="week">周</button>
+            <button data-range="month">月</button>
+          </div>
+        </div>
+        <div id="trendChart"></div>
+      </div>
+
+      <!-- 连续打卡 -->
+      <div class="card">
+        <div class="streak-banner">连续专注 <span class="n" id="streakBig">0</span> 天</div>
+        <div class="calendar" id="calendar"></div>
+      </div>
+
+      <!-- 学习记录 -->
+      <div class="card">
+        <div class="row" style="margin-bottom:6px">
+          <h2 class="card-title" style="margin:0">学习记录</h2>
+          <div>
+            <button class="btn-ghost" id="exportBtn" style="font-size:12px;padding:8px 12px">⬇️ 导出</button>
+            <button class="btn-ghost btn-danger" id="clearBtn" style="font-size:12px;padding:8px 12px">🗑 清空</button>
+          </div>
+        </div>
+        <div id="recordList"></div>
+      </div>
+    </main>
+
+    <nav class="tabbar">
+      <button data-go="index.html"><span class="ic">⏱️</span>计时</button>
+      <button class="active" data-go="stats.html"><span class="ic">📊</span>统计</button>
+      <button data-go="settings.html"><span class="ic">⚙️</span>设置</button>
+    </nav>
+  </div>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

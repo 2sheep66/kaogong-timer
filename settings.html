@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="考公计时器">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
+  <link rel="icon" href="assets/icons/icon-192.png">
+  <link rel="stylesheet" href="css/style.css">
+  <title>设置 · 考公计时器</title>
+</head>
+<body data-page="settings" data-theme="light" data-timer-style="digital">
+  <div class="app">
+    <header class="header">
+      <h1>设置</h1>
+      <a class="gear" href="index.html" aria-label="返回" style="font-size:18px">✕</a>
+    </header>
+
+    <main class="page fade" id="page">
+      <!-- 学习目标 -->
+      <div class="section-title">学习目标</div>
+      <div class="card">
+        <div class="set-row">
+          <span class="lab">每日最低时长</span>
+          <span><input class="input" type="number" id="dailyTarget" min="0" style="width:64px"> 小时</span>
+        </div>
+        <div class="set-row"><span class="lab">行测（每周）</span><span><input class="input" type="number" id="tgt_xingce" min="0" style="width:64px"> 小时</span></div>
+        <div class="set-row"><span class="lab">申论（每周）</span><span><input class="input" type="number" id="tgt_shenlun" min="0" style="width:64px"> 小时</span></div>
+        <div class="set-row"><span class="lab">面试（每周）</span><span><input class="input" type="number" id="tgt_mianshi" min="0" style="width:64px"> 小时</span></div>
+        <div class="set-row"><span class="lab">综合（每周）</span><span><input class="input" type="number" id="tgt_zonghe" min="0" style="width:64px"> 小时</span></div>
+      </div>
+
+      <!-- 科目管理 -->
+      <div class="section-title">科目管理</div>
+      <div class="card">
+        <div id="customSubjectsList"><p class="muted" style="padding:6px 0">还没有自定义科目，点击下方按钮添加。</p></div>
+        <div class="set-row"><button class="btn-ghost" id="addCustomSubject">＋ 新建自定义科目</button></div>
+      </div>
+
+      <!-- 考试倒计时 -->
+      <div class="section-title">考试倒计时</div>
+      <div class="card">
+        <div class="set-row"><span class="lab">考试名称</span><input class="input lab" id="examName" style="min-width:140px"></div>
+        <div class="set-row"><span class="lab">考试日期</span><input class="input" id="examDate" type="date"></div>
+        <div class="set-row"><span class="lab accent-text" id="examRemain">距离考试还有 — 天</span><span></span></div>
+      </div>
+
+      <!-- 提醒通知 -->
+      <div class="section-title">提醒通知</div>
+      <div class="card">
+        <div class="set-row">
+          <span class="lab">每日学习提醒<span class="desc">到点未学习则提醒</span></span>
+          <label><input type="checkbox" id="reminderEnabled"> 启用</label>
+        </div>
+        <div class="set-row"><span class="lab">提醒时间</span><input class="input" id="reminderTime" type="time"></div>
+        <div class="set-row"><span class="lab">目标未达标提醒</span><label><input type="checkbox" id="targetNotMet"> 启用</label></div>
+        <div class="set-row"><span class="lab">连续打卡中断提醒</span><label><input type="checkbox" id="streakBreak"> 启用</label></div>
+        <div class="set-row"><span class="lab">休息提醒（专注后）</span><label><input type="checkbox" id="restReminder" checked> 启用</label></div>
+      </div>
+
+      <!-- 外观 -->
+      <div class="section-title">外观</div>
+      <div class="card">
+        <div class="set-row">
+          <span class="lab">主题</span>
+          <select class="input" id="theme">
+            <option value="light">浅色</option>
+            <option value="dark">深色</option>
+            <option value="auto">跟随系统</option>
+          </select>
+        </div>
+        <div class="set-row">
+          <span class="lab">强调色</span>
+          <span class="swatches" id="accentSwatches">
+            <span class="swatch" data-c="#1890ff" style="background:#1890ff"></span>
+            <span class="swatch" data-c="#52c41a" style="background:#52c41a"></span>
+            <span class="swatch" data-c="#fa8c16" style="background:#fa8c16"></span>
+            <span class="swatch" data-c="#722ed1" style="background:#722ed1"></span>
+          </span>
+        </div>
+        <div class="set-row">
+          <span class="lab">计时器样式</span>
+          <select class="input" id="timerStyle">
+            <option value="digital">数字</option>
+            <option value="ring">圆环</option>
+            <option value="bar">进度条</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- 数据管理 -->
+      <div class="section-title">数据管理</div>
+      <div class="card">
+        <div class="set-row"><span class="lab">导出备份</span><button class="btn-ghost" id="exportData">⬇️ 导出 JSON</button></div>
+        <div class="set-row"><span class="lab">导入恢复</span><button class="btn-ghost" id="importData">⬆️ 导入 JSON</button></div>
+        <div class="set-row"><span class="lab">清除全部</span><button class="btn-ghost btn-danger" id="clearAll">🗑 清除所有记录</button></div>
+        <div class="set-row"><span class="lab tertiary" id="dataInfo">总记录：0 条</span><span></span></div>
+      </div>
+
+      <!-- 关于 -->
+      <div class="section-title">关于</div>
+      <div class="card">
+        <div class="set-row"><span class="lab">考公学习计时器 v1.0</span><span class="tertiary">纯本地 · 离线</span></div>
+        <div class="set-row"><span class="lab">意见反馈</span><button class="btn-ghost" id="feedback">✉️ 反馈</button></div>
+        <div class="set-row"><span class="lab">给个好评</span><button class="btn-ghost" id="rate">⭐ 好评</button></div>
+      </div>
+    </main>
+
+    <nav class="tabbar">
+      <button data-go="index.html"><span class="ic">⏱️</span>计时</button>
+      <button data-go="stats.html"><span class="ic">📊</span>统计</button>
+      <button class="active" data-go="settings.html"><span class="ic">⚙️</span>设置</button>
+    </nav>
+  </div>
+
+  <input type="file" id="importFile" accept="application/json" hidden>
+  <script src="js/app.js"></script>
+</body>
+</html>
